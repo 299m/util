@@ -17,3 +17,9 @@ func OnPanic(w http.ResponseWriter) {
 		http.Error(w, "Server error", 500)
 	}
 }
+
+func OnPanicFunc() {
+	if r := recover(); r != nil {
+		log.Println(r)
+	}
+}
