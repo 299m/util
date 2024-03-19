@@ -3,6 +3,7 @@ package util
 import (
 	"log"
 	"net/http"
+	"runtime/debug"
 )
 
 func CheckError(err error) {
@@ -13,6 +14,7 @@ func CheckError(err error) {
 
 func OnPanic(w http.ResponseWriter) {
 	if r := recover(); r != nil {
+		debug.PrintStack()
 		log.Println(r)
 		http.Error(w, "Server error", 500)
 	}
@@ -20,6 +22,7 @@ func OnPanic(w http.ResponseWriter) {
 
 func OnPanicFunc() {
 	if r := recover(); r != nil {
+		debug.PrintStack()
 		log.Println(r)
 	}
 }
